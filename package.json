@@ -1,0 +1,20 @@
+{
+  "name": "odin",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "sanctuary",
+      "website",
+      "game",
+      "game2",
+      "mintsite",
+      "packages/*"
+    ],
+    "nohoist": [
+      "**/webpack-dev-server"
+    ]
+  },
+  "devDependencies": {
+    "prettier": "2.6.1"
+  }
+}

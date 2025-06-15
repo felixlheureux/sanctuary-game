@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+
+    html {
+        @apply bg-white font-space-grotesk text-sm text-white;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        @apply font-bangers text-primary;
+    }
+
+    h2, h3, h4, h5, h6 {
+        @apply font-normal tracking-widest text-teal;
+    }
+
+    h1 {
+        @apply text-5xl
+    }
+
+    h2 {
+        @apply text-4xl
+    }
+
+    h3 {
+        @apply text-3xl
+    }
+
+    h4 {
+        @apply text-2xl
+    }
+
+    h5 {
+        @apply text-xl
+    }
+
+    h6 {
+        @apply text-lg
+    }
+
+    @screen md {
+        /*h1, h2, h3, h4, h5, h6 {*/
+        /*    @apply mb-8*/
+        /*}*/
+        html {
+            @apply bg-white font-space-grotesk text-base;
+        }
+
+        h1 {
+            @apply text-7xl
+        }
+
+        h2 {
+            @apply text-5xl
+        }
+
+        h3 {
+            @apply text-4xl
+        }
+
+        h4 {
+            @apply text-3xl
+        }
+
+        h5 {
+            @apply text-2xl
+        }
+
+        h6 {
+            @apply text-xl
+        }
+    }
+}
+
+@layer utilities {
+
+    .button-clip-path {
+        clip-path: polygon(0 15%, 100% 0, 100% 100%, 0% 100%);
+    }
+
+    .text-mask {
+        -webkit-mask-image: linear-gradient(180deg, transparent 5%, rgba(0, 0, 0, 1) 15%, rgba(0, 0, 0, 1) 85%, transparent 95%);
+        mask-image: linear-gradient(180deg, transparent 5%, rgba(0, 0, 0, 1) 15%, rgba(0, 0, 0, 1) 85%, transparent 95%);
+    }
+
+    .text-mask {
+        -ms-overflow-style: none; /* Internet Explorer 10+ */
+        scrollbar-width: none; /* Firefox */
+    }
+
+    .text-mask::-webkit-scrollbar {
+        display: none; /* Safari and Chrome */
+    }
+
+    .nav-clip-path {
+        clip-path: polygon(10% 4%, 100% 0, 95% 89%, 0% 100%);
+        filter: drop-shadow(-1px 6px 3px rgba(50, 50, 0, 0.5));
+    }
+
+}
