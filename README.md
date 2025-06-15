@@ -1,10 +1,10 @@
-# Children of Ukiyo - 3D Game
+# Sanctuary Game - 3D Game
 
 [Play the game here!](https://sanctuary-game.pages.dev/)
 
 ## 🎮 About
 
-Children of Ukiyo is a fun 3D action-adventure game that I created as a side project to learn Three.js and explore 3D game development. The game takes place in a mystical universe where different factions work together to maintain balance between worlds.
+Sanctuary Game is a fun 3D action-adventure game that I created as a side project to learn Three.js and explore 3D game development. The game takes place in a mystical universe where different factions work together to maintain balance between worlds.
 
 ## 🛠️ Technologies
 
@@ -106,7 +106,7 @@ This project is under the MIT License. See the `LICENSE` file for details.
 
 - Three.js for the 3D engine
 - All contributors
-- The Children of Ukiyo community
+- The Sanctuary Game community
 
 ## 📞 Support
 
