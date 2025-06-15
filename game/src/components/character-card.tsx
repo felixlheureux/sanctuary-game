@@ -2,7 +2,7 @@ import { Skeleton } from '@mantine/core';
 import React, { useState } from 'react';
 
 interface CharacterCardProps {
-  tokenID: number;
+  tokenID: string;
   name: string;
   onClick?: () => void;
   selected?: boolean;

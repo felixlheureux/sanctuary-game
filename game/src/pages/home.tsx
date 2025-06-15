@@ -61,7 +61,7 @@ const Home: React.FC<{
               className={'w-[256px] md:w-full mb-10'}
             >
               <CharacterCard
-                tokenID={character.tokenID}
+                tokenID={character.model}
                 name={character.name}
                 selected={character.model === selectedCharacter}
                 onClick={() => handleSelect(i)}

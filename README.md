@@ -1,81 +1,117 @@
-# Odin
+# Children of Ukiyo - 3D Game
 
-## Developer setup
+[Play the game here!](https://sanctuary-game.pages.dev/)
 
-### External dependencies
+## 🎮 About
 
-Install the following external dependencies:
+Children of Ukiyo is a fun 3D action-adventure game that I created as a side project to learn Three.js and explore 3D game development. The game takes place in a mystical universe where different factions work together to maintain balance between worlds.
 
-- [Git](https://git-scm.com/downloads)
-- [Docker](https://www.docker.com/products/docker-desktop/)
-- [Go 1.18](https://go.dev/dl/) download arm64 if using Apple chip
-- [nvm](https://github.com/nvm-sh/nvm#install--update-script)
-- node: run `nvm install 16`
-- [yarn](https://yarnpkg.com/getting-started/install)
-- [aws-cli](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
-- [aws sam cli](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html)
-- [postgres-client](https://www.compose.com/articles/postgresql-tips-installing-the-postgresql-client/)
-- [goose](https://github.com/pressly/goose#install)
+## 🛠️ Technologies
 
-### Clone Git Repository
+### Frontend
 
-1. [Generate new SSH key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
-2. [Add a new SSH key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account)
-3. Choose a directory where you want to work. We'll call it WORKDIR
-4. Open your Terminal and type: cd WORKDIR && git clone git@github.com:childrenofukiyo/odin.git
-5. The previous command will create the directory: WORKDIR/odin
+- **React** - For building the user interface
+- **TypeScript** - For type-safe code
+- **Three.js** - For 3D rendering and game mechanics
+- **GSAP** - For smooth animations and transitions
+- **Tailwind CSS** - For styling and responsive design
+- **Mantine** - For UI components and theming
 
-Initialize local postgres and server (Must run this script the first time)
+### Game Development
 
-1. Go to ./scripts
-2. Run `./init-services.sh` (this script resets the database and runs migrations)
+- **Three.js** - Core 3D engine
+- **GLTF/FBX** - For 3D models and animations
+- **WebGL** - For hardware-accelerated graphics
+- **Howler.js** - For audio management
+- **GSAP** - For timeline animations and effects
 
-Start services
+### Development Tools
 
-1. Go to ./scripts
-2. Run `./start-services.sh` (this script keeps the database intact)
+- **Vite** - For fast development and building
+- **Yarn** - Package management
+- **ESLint** - Code linting
+- **Prettier** - Code formatting
 
-Run migrations
+## ✨ Features
 
-1. Go to ./scripts
-2. Run `./migrate.sh`
+- 🎯 3D rendering with Three.js
+- 🌓 Dynamic lighting and shadows
+- 🎭 Customizable characters with animations
+- 🏰 Detailed environments
+- 🎵 Immersive soundtrack
+- 🎨 Modern UI
 
-Run Sanctuary
+## 🚀 Getting Started
 
-```shell
-cd WORKDIR/sanctuary
+### Prerequisites
+
+- Node.js (version 16 or higher)
+- Yarn
+- A modern browser with WebGL support
+
+### Installation
+
+```bash
+# Install dependencies
 yarn install
+
+# Start the development server
 yarn dev
 ```
 
-You should now be able to visit http://localhost:3000/
+The game will be available at `http://localhost:3000`
 
-Run Website
+## 🛠️ Technical Details
 
-```shell
-cd WORKDIR/website
-yarn install
-yarn dev
-```
+### Graphics
 
-You should now be able to visit http://localhost:3001/
+The game uses Three.js for 3D rendering with some cool features:
 
-### GoLand IDE (Recommended)
+- Dynamic lighting system
+- Shadow mapping
+- Async resource loading
+- Basic texture optimization
 
-[Install GoLand](https://www.jetbrains.com/help/go/installation-guide.html)
+### Controls
 
-Recommended plugins:
+- WASD: Character movement
+- Space: Jump
+- Shift: Run
+- Mouse: Camera control
 
-- Save Actions: Enables formatting code on save
-- Grep Console: Color logs in console
-- Prettier: Auto formatting for typescript and HTML
-- Tailwind CSS: Tailwind class auto-complete
-- One Dark Theme: Theme colors
-- Atom Material Icons: Folder and file icons
-- Nyan Progress Bar: Because lol
+## 🎨 Customization
 
-### AWS
+You can customize various aspects of the game:
 
-[AWS Console](https://114892737845.signin.aws.amazon.com/console/)
+- Playable characters
+- Visual effects
+- Graphics settings
+- Controls
 
-![AWS diagram](aws_diagram.png)
+## 🤝 Contributing
+
+Feel free to contribute! Here's how:
+
+1. Fork the project
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Open a Pull Request
+
+## 📝 License
+
+This project is under the MIT License. See the `LICENSE` file for details.
+
+## 🙏 Acknowledgments
+
+- Three.js for the 3D engine
+- All contributors
+- The Children of Ukiyo community
+
+## 📞 Support
+
+For questions or issues, feel free to open a GitHub issue or reach out to me directly.
+
+---
+
+Made with ❤️ as a learning project

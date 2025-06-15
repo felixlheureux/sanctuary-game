@@ -1,13 +1,11 @@
-import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.118/build/three.module.js";
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.118/build/three.module.js';
 
-import { GLTFLoader } from "https://cdn.jsdelivr.net/npm/three@0.118/examples/jsm/loaders/GLTFLoader.js";
-import { FBXLoader } from "https://cdn.jsdelivr.net/npm/three@0.118/examples/jsm/loaders/FBXLoader.js";
+import { FBXLoader } from 'https://cdn.jsdelivr.net/npm/three@0.118/examples/jsm/loaders/FBXLoader.js';
+import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.118/examples/jsm/loaders/GLTFLoader.js';
 
-import { entity } from "./entity.js";
-
+import { entity } from './entity.js';
 
 export const gltf_component = (() => {
-
   class StaticModelComponent extends entity.Component {
     constructor(params) {
       super();
@@ -21,7 +19,7 @@ export const gltf_component = (() => {
     }
 
     InitComponent() {
-      this._RegisterHandler("update.position", (m) => {
+      this._RegisterHandler('update.position', (m) => {
         this._OnPosition(m);
       });
     }
@@ -33,9 +31,12 @@ export const gltf_component = (() => {
     }
 
     _LoadModels() {
-      if (this._params.resourceName.endsWith("glb") || this._params.resourceName.endsWith("gltf")) {
+      if (
+        this._params.resourceName.endsWith('glb') ||
+        this._params.resourceName.endsWith('gltf')
+      ) {
         this._LoadGLB();
-      } else if (this._params.resourceName.endsWith("fbx")) {
+      } else if (this._params.resourceName.endsWith('fbx')) {
         this._LoadFBX();
       }
     }
@@ -54,8 +55,8 @@ export const gltf_component = (() => {
         texture.encoding = THREE.sRGBEncoding;
       }
 
-      this._target.traverse(c => {
-        if (c.name.includes("hide")) c.visible = false;
+      this._target.traverse((c) => {
+        if (c.name.includes('hide')) c.visible = false;
         let materials = c.material;
         if (!(c.material instanceof Array)) {
           materials = [c.material];
@@ -96,6 +97,20 @@ export const gltf_component = (() => {
       loader.setResourcePath(this._params.resourcePath);
       loader.load(this._params.resourceName, (glb) => {
         this._OnLoaded(glb.scene);
+        glb.scene.traverse((child) => {
+          if (child.geometry) {
+            this._parent._disposables.add(child.geometry);
+          }
+          if (child.material) {
+            if (Array.isArray(child.material)) {
+              child.material.forEach((material) =>
+                this._parent._disposables.add(material)
+              );
+            } else {
+              this._parent._disposables.add(child.material);
+            }
+          }
+        });
       });
     }
 
@@ -105,10 +120,44 @@ export const gltf_component = (() => {
       loader.setResourcePath(this._params.resourcePath);
       loader.load(this._params.resourceName, (fbx) => {
         this._OnLoaded(fbx);
+        fbx.traverse((child) => {
+          if (child.geometry) {
+            this._parent._disposables.add(child.geometry);
+          }
+          if (child.material) {
+            if (Array.isArray(child.material)) {
+              child.material.forEach((material) =>
+                this._parent._disposables.add(material)
+              );
+            } else {
+              this._parent._disposables.add(child.material);
+            }
+          }
+        });
       });
     }
 
-    Update(timeInSeconds) {
+    Update(timeInSeconds) {}
+
+    Dispose() {
+      if (this._target) {
+        this._params.scene.remove(this._target);
+        this._target.traverse((child) => {
+          if (child.geometry) {
+            child.geometry.dispose();
+          }
+          if (child.material) {
+            if (Array.isArray(child.material)) {
+              child.material.forEach((material) =>
+                material.dispose()
+              );
+            } else {
+              child.material.dispose();
+            }
+          }
+        });
+        this._target = null;
+      }
     }
   }
 
@@ -125,7 +174,7 @@ export const gltf_component = (() => {
     }
 
     InitComponent() {
-      this._RegisterHandler("update.position", (m) => {
+      this._RegisterHandler('update.position', (m) => {
         this._OnPosition(m);
       });
     }
@@ -140,8 +189,7 @@ export const gltf_component = (() => {
       this._target = this._params.obj;
     }
 
-    Update(timeInSeconds) {
-    }
+    Update(timeInSeconds) {}
   }
 
   class AnimatedModelComponent extends entity.Component {
@@ -151,7 +199,7 @@ export const gltf_component = (() => {
     }
 
     InitComponent() {
-      this._RegisterHandler("update.position", (m) => {
+      this._RegisterHandler('update.position', (m) => {
         this._OnPosition(m);
       });
     }
@@ -170,9 +218,12 @@ export const gltf_component = (() => {
     }
 
     _LoadModels() {
-      if (this._params.resourceName.endsWith("glb") || this._params.resourceName.endsWith("gltf")) {
+      if (
+        this._params.resourceName.endsWith('glb') ||
+        this._params.resourceName.endsWith('gltf')
+      ) {
         this._LoadGLB();
-      } else if (this._params.resourceName.endsWith("fbx")) {
+      } else if (this._params.resourceName.endsWith('fbx')) {
         this._LoadFBX();
       }
     }
@@ -185,8 +236,8 @@ export const gltf_component = (() => {
       this._target.position.copy(this._parent._position);
 
       this.Broadcast({
-        topic: "update.position",
-        value: this._parent._position
+        topic: 'update.position',
+        value: this._parent._position,
       });
 
       let texture = null;
@@ -196,8 +247,8 @@ export const gltf_component = (() => {
         texture.encoding = THREE.sRGBEncoding;
       }
 
-      this._target.traverse(c => {
-        if (c.name.includes("hide")) c.visible = false;
+      this._target.traverse((c) => {
+        if (c.name.includes('hide')) c.visible = false;
         let materials = c.material;
         if (!(c.material instanceof Array)) {
           materials = [c.material];
@@ -227,31 +278,16 @@ export const gltf_component = (() => {
         }
       });
 
-      // const _OnLoad = (anim) => {
-      //   const clip = anim.animations[0];
-      //   const action = this._mixer.clipAction(clip);
-      //
-      //   action.play();
-      // };
-      //
-      // const loader = new FBXLoader();
-      // loader.setPath(this._params.resourcePath);
-      // loader.load(this._params.resourceAnimation, (a) => {
-      //   _OnLoad(a);
-      // });
-      //
-      // this._mixer = new THREE.AnimationMixer(this._target);
-
       this._parent._mesh = this._target;
       this.Broadcast({
-        topic: "load.character",
-        model: this._target
+        topic: 'load.character',
+        model: this._target,
       });
 
       this._mixer = new THREE.AnimationMixer(this._target);
 
       for (let i = 0; i < animations.length; i++) {
-        if (animations[i].name === "idle") {
+        if (animations[i].name === 'idle') {
           const clip = animations[i];
           if (clip) {
             const action = this._mixer.clipAction(animations[i]);
@@ -287,7 +323,6 @@ export const gltf_component = (() => {
   return {
     StaticModelComponent: StaticModelComponent,
     StaticModelComponentFromLoaded: StaticModelComponentFromLoaded,
-    AnimatedModelComponent: AnimatedModelComponent
+    AnimatedModelComponent: AnimatedModelComponent,
   };
-
 })();
